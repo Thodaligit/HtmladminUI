@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="25d45d42fa7749c685d5ab3cdd9f75a0" Name="Diagram1">
+        <EntityTypeShape EntityType="SuymembershipModel.Artist" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SuymembershipModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="SuymembershipModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="SuymembershipModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="SuymembershipModel.AspNetUser" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="SuymembershipModel.Cart" Width="1.5" PointX="9.75" PointY="8" />
+        <EntityTypeShape EntityType="SuymembershipModel.Customer" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SuymembershipModel.MasterProductCategory" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="SuymembershipModel.OrderDetail" Width="1.5" PointX="10" PointY="1.75" />
+        <EntityTypeShape EntityType="SuymembershipModel.Order" Width="1.5" PointX="7.75" PointY="1" />
+        <EntityTypeShape EntityType="SuymembershipModel.Product" Width="1.5" PointX="7.5" PointY="7" />
+        <EntityTypeShape EntityType="SuymembershipModel.ProductCategory" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="SuymembershipModel.ProductSubcategory" Width="1.5" PointX="5.25" PointY="8" />
+        <AssociationConnector Association="SuymembershipModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SuymembershipModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SuymembershipModel.FK_Carts_Product" />
+        <AssociationConnector Association="SuymembershipModel.FK_ProductCategory_MasterProductCategory" />
+        <AssociationConnector Association="SuymembershipModel.FK_dbo_OrderDetails_dbo_Orders_OrderId" />
+        <AssociationConnector Association="SuymembershipModel.FK_Product_ProductSubcategory" />
+        <AssociationConnector Association="SuymembershipModel.FK_ProductSubcategory_ProductCategory" />
+        <AssociationConnector Association="SuymembershipModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="SuymembershipModel.Publish" Width="1.5" PointX="9.75" PointY="11.125" />
+        <AssociationConnector Association="SuymembershipModel.FK_Publish_Customer" />
+        <AssociationConnector Association="SuymembershipModel.FK_Publish_Product" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

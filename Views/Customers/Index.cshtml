@@ -1,0 +1,272 @@
+﻿@model IEnumerable<AdminUI.Models.CustomerBL>
+
+@{
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+@using (Html.BeginForm("UploadAsync", "Customers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <table>
+        <tr>
+            <td>File:</td>
+            <td>
+                <input type="file" name="UploadedFile" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="Submit" value="Submit" />
+            </td>
+        </tr>
+    </table>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<style type="text/css">
+
+    ltgray {
+        background-color: lightgray !important;
+    }
+
+    thead th {
+        max-width: 70px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+        thead th:hover {
+            overflow: visible;
+            white-space: normal;
+            height: auto;
+        }
+
+    #customerTable tbody td {
+        max-width: 120px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+        #customerTable tbody td:hover {
+            overflow: visible;
+            white-space: normal;
+            height: auto;
+        }
+</style>
+
+
+
+<table id="customerTable" class="table table-bordered" style="width:100%">
+
+    <thead style="background-color:lightgray">
+        <tr>
+            <th>
+                CustomerId
+            </th>
+            <th>
+                CustomerName
+            </th>
+            <th>
+                ContactNumber
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                B2B
+            </th>
+            <th>
+                IsActive
+            </th>
+            <th>
+                CreatedDate
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                CustomerId
+            </th>
+            <th>
+                CustomerName
+            </th>
+            <th>
+                ContactNumber
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                B2B
+            </th>
+            <th>
+                IsActive
+            </th>
+            <th>
+                CreatedDate
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.B2B)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { CustomerId = item.CustomerId }) |
+                    @Html.ActionLink("Details", "Details", new { CustomerId = item.CustomerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { CustomerId = item.CustomerId })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+</table>
+
+<style type="text/css">
+    tfoot {
+        display: table-row-group;
+    }
+</style>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+
+        $('#customerTable tfoot tr').clone(true).appendTo('#customerTable tfoot');
+        $('#customerTable tfoot tr:eq(1) th').each(function (i) {
+
+
+            $(this).insertAfter($(this).siblings('#customerTable thead'));
+
+            $(this).html('<input type="text" size="5" placeholder="search"/>');
+
+            $('input', this).on('keyup change', function () {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+            $('input').each(function () {
+                $(this).width($(this).parent().width() - 26);
+            });
+
+
+
+        });
+
+
+        $("#customerTable tfoot tr:first-child").remove();
+
+        var table = $('#customerTable').DataTable({
+            dom: 'Blfrtip'
+            , order: [[1, 'desc']]
+            , buttons: [
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        format: {
+                            title: function (data, column) {
+                                return null;
+                            }
+                        },
+                        columns: [0, 1]
+                    }, footer: true
+
+                }
+                //,
+                //{
+                //    extend: 'csv',
+                //    exportOptions: {
+                //        columns: [0, 1]
+                //    }, footer: true
+                //}
+                //,
+                //{
+                //    extend: 'csv',
+                //    title: 'csv',
+                //    exportOptions: {
+                //        columns: ':visible'
+                //    }
+                //},
+                //{
+                //    extend: 'pdf',
+                //    title: 'pdf',
+                //    exportOptions: {
+                //        columns: ':visible'
+                //    }
+                //}
+                //,
+                //{
+                //    extend: 'print',
+                //    exportOptions: {
+                //        columns: [0, 1]
+                //    }, footer: true
+                //}
+                ,
+                {
+                    extend: 'colvis',
+                    exportOptions: {
+                        columns: [0, 1]
+                    }, footer: true
+                }
+            ]
+            , columnDefs: [
+
+                { targets: [1, 2], visible: true },
+                { targets: '_all', visible: false }
+            ]
+            , "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+
+        });
+
+    });
+
+</script>
+
+

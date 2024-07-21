@@ -1,0 +1,324 @@
+﻿@model IEnumerable<AdminUI.Models.Orders.OrderBL>
+
+@{
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+@using (Html.BeginForm("UploadAsync", "Orders", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <table>
+        <tr>
+            <td>File:</td>
+            <td>
+                <input type="file" name="UploadedFile" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="Submit" value="Submit" />
+            </td>
+        </tr>
+    </table>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<style type="text/css">
+
+    ltgray {
+        background-color: lightgray !important;
+    }
+
+    thead th {
+        max-width: 70px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+        thead th:hover {
+            overflow: visible;
+            white-space: normal;
+            height: auto;
+        }
+
+    #ordersTable tbody td {
+        max-width: 120px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    #ordersTable tbody td:hover {
+        overflow: visible;
+        white-space: normal;
+        height: auto;
+    }
+</style>
+
+
+
+<table id="ordersTable" class="table table-bordered" style="width:100%">
+
+    <thead style="background-color:lightgray">
+        <tr>
+            <th>
+                OrderId
+            </th>
+            <th>
+                OrderDate
+            </th>
+            <th>
+                Username
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                PostalCode
+            </th>
+            <th>
+                Country
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                OrderId
+            </th>
+            <th>
+                OrderDate
+            </th>
+            <th>
+                Username
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                PostalCode
+            </th>
+            <th>
+                Country
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { OrderId = item.OrderId }) |
+                    @Html.ActionLink("Details", "Details", new { OrderId = item.OrderId }) |
+                    @Html.ActionLink("Delete", "Delete", new { OrderId = item.OrderId })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+</table>
+
+<style type="text/css">
+    tfoot {
+        display: table-row-group;
+    }
+</style>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+
+        $('#ordersTable tfoot tr').clone(true).appendTo('#ordersTable tfoot');
+        $('#ordersTable tfoot tr:eq(1) th').each(function (i) {
+
+
+            $(this).insertAfter($(this).siblings('#ordersTable thead'));
+
+            $(this).html('<input type="text" size="5" placeholder="search"/>');
+
+            $('input', this).on('keyup change', function () {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+            $('input').each(function () {
+                $(this).width($(this).parent().width() - 26);
+            });
+
+
+
+        });
+
+
+        $("#ordersTable tfoot tr:first-child").remove();
+
+        var table = $('#ordersTable').DataTable({
+            dom: 'Blfrtip'
+            , order: [[1, 'desc']]
+            , buttons: [
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        format: {
+                            title: function (data, column) {
+                                return null;
+                            }
+                        },
+                        columns: [0, 1,2,3,4,5,6,7,8,9,10,11,12]
+                    }, footer: true
+
+                }
+                //,
+                //{
+                //    extend: 'csv',
+                //    exportOptions: {
+                //        columns: [0, 1]
+                //    }, footer: true
+                //}
+                //,
+                //{
+                //    extend: 'csv',
+                //    title: 'csv',
+                //    exportOptions: {
+                //        columns: ':visible'
+                //    }
+                //},
+                //{
+                //    extend: 'pdf',
+                //    title: 'pdf',
+                //    exportOptions: {
+                //        columns: ':visible'
+                //    }
+                //}
+                //,
+                //{
+                //    extend: 'print',
+                //    exportOptions: {
+                //        columns: [0, 1]
+                //    }, footer: true
+                //}
+                ,
+                {
+                    extend: 'colvis',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                    }, footer: true
+                }
+            ]
+            , columnDefs: [{
+                /* targets: 1,*/
+                visible: false
+            }]
+            , "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+
+        });
+
+    });
+
+</script>
+
+

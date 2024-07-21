@@ -1,0 +1,28 @@
+﻿@model AdminUI.Models.MasterProductCategoryBL
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MasterProductCategoryBL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MasterProductCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MasterProductCategoryName)
+        </dd>
+
+      
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { MasterProductCategoryId = Model.MasterProductCategoryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

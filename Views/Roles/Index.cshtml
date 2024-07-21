@@ -1,0 +1,213 @@
+﻿@model IEnumerable<AdminUI.AspNetRole>
+
+@{
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+
+
+
+
+<style type="text/css">
+
+    .ltgray {
+        background-color: lightgray !important;
+    }
+
+    thead th {
+        max-width: 70px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+        thead th:hover {
+            overflow: visible;
+            white-space: normal;
+            height: auto; /* just added this line */
+        }
+
+    tbody td {
+        max-width: 70px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+        tbody td:hover {
+            overflow: visible;
+            white-space: normal;
+            height: auto; /* just added this line */
+        }
+
+    /* tbody td {
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }*/
+
+</style>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="AspNetRoleTable" class="table table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+
+<style type="text/css">
+    tfoot {
+        display: table-row-group;
+    }
+</style>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        /* var table = $('#productCategoriesTable').DataTable({});*/
+
+
+
+
+        $('#AspNetRoleTable thead:eq(2) tr').clone(true).appendTo('#AspNetRoleTable thead:eq(1)');
+        $('#AspNetRoleTable thead:eq(1) tr:eq(1) th').each(function (i) {
+
+
+            $(this).insertAfter($(this).siblings('#AspNetRoleTable thead:eq(1)'));
+
+            $(this).html('<input type="text" placeholder="search"/>');
+
+            $('input', this).on('keyup change', function () {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+            $('input').each(function () {
+                $(this).width($(this).parent().width() - 20);
+            });
+
+
+
+        });
+
+
+        $("#AspNetRoleTable thead:eq(2) tr:first-child").remove();
+
+
+        var table = $('#AspNetRoleTable').DataTable({
+
+            // Enable the searching
+            // of the DataTable
+            dom: 'Blfrtip'
+
+            , drawCallback: function () {
+                var api = this.api();
+                var sum = 0;
+                var formated = 0;
+                //to show first th
+                //$(api.column(0).footer()).html('Total');
+
+                /*   for (var i = 3; i <= 5; i++) {*/
+                // sum = api.column(i, { page: 'current' }).data().sum();
+                /*  sum = api.column(i, { "filter": "applied" }).data().sum();*/
+
+
+                //to format this sum
+                //formated = parseFloat(sum).toLocaleString(undefined, { minimumFractionDigits: 0 });
+                //$(api.column(i).header()).html('' + formated);
+                /*$(api.column(i).footer()).html('' + formated);*/
+                /*   }*/
+
+                $('#AspNetRoleTable thead:eq(0) tr:eq(0) th:eq(0)').html('Total Role : ' + api.column(1, { "filter": "applied" }).data().count())
+
+            },
+
+            buttons: [
+                {
+                    extend: 'excel',
+                    title: 'E',
+                    exportOptions: {
+                        columns: ':visible'
+                    }, footer: true
+                },
+                {
+                    extend: 'csv',
+                    title: 'E',
+                    exportOptions: {
+                        columns: ':visible'
+                    }, footer: true
+                },
+                {
+                    extend: 'pdf',
+                    title: 'E',
+                    exportOptions: {
+                        columns: ':visible'
+                    }, footer: true
+                },
+                {
+                    extend: 'print',
+                    title: 'E',
+                    exportOptions: {
+                        columns: ':visible'
+                    }, footer: true
+                },
+                {
+                    extend: 'colvis',
+                    exportOptions: {
+                        columns: ':visible'
+                    }, footer: true
+                }
+            ]
+
+            //,columnDefs: [{
+            //    targets: 1,
+            //    visible: false
+            //}]
+            , columnDefs: [
+                { targets: [0], visible: true },
+                { targets: '_all', visible: false }
+            ]
+            ,
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+
+        });
+
+    });
+
+</script>
+

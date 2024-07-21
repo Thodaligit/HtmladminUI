@@ -1,0 +1,127 @@
+﻿@model AdminUI.Models.ProductBL
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductBL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductSubcategoryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductSubcategoryId)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreDesignNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreDesignNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrandDesignNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrandDesignNo)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StockStartQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockStartQuantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StockInQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockInQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductImageUrl)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductVideoUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductVideoUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MediaFolderPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediaFolderPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { ProductId = Model.ProductId })|
+    @Html.ActionLink("Back to List", "Index")
+</p>
