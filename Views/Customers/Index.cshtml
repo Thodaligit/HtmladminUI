@@ -82,13 +82,16 @@
                 Address
             </th>
             <th>
-                B2B
+                B2C
             </th>
             <th>
                 IsActive
             </th>
             <th>
                 CreatedDate
+            </th>
+            <th>
+                Test
             </th>
             <th>
                 Action
@@ -110,13 +113,16 @@
                 Address
             </th>
             <th>
-                B2B
+                B2C
             </th>
             <th>
                 IsActive
             </th>
             <th>
                 CreatedDate
+            </th>
+            <th>
+                Test
             </th>
             <th>
                 Action
@@ -149,9 +155,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.IsActive)
                 </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedDate)
                 </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Test)
+                </td>
+
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { CustomerId = item.CustomerId }) |
                     @Html.ActionLink("Details", "Details", new { CustomerId = item.CustomerId }) |

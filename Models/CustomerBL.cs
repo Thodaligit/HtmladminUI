@@ -16,6 +16,7 @@ namespace AdminUI.Models
         public string B2B { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string Test { get; set; }
         public bool IsNeedsToDelete { get; set; }
     }
 }
