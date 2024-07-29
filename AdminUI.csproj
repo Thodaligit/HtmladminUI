@@ -236,6 +236,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUserRolesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DayBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MasterProductCategoriesController.cs" />
@@ -270,25 +271,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MembershipModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CustomerBL.cs" />
-    <Compile Include="Models\CustomerBLVM.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MasterProductCategoryBL.cs" />
-    <Compile Include="Models\MasterProductCategoryBLVM.cs" />
-    <Compile Include="Models\Orders\OrderBL.cs" />
-    <Compile Include="Models\Orders\OrderBLVM.cs" />
-    <Compile Include="Models\Orders\OrderDetailBL.cs" />
-    <Compile Include="Models\ParamsHelper.cs" />
-    <Compile Include="Models\ProductBL.cs" />
-    <Compile Include="Models\ProductBLVM.cs" />
-    <Compile Include="Models\ProductCategoryBL.cs" />
-    <Compile Include="Models\ProductCategoryBLVM.cs" />
-    <Compile Include="Models\ProductSubcategoryBL.cs" />
-    <Compile Include="Models\ProductSubcategoryBLVM.cs" />
-    <Compile Include="Models\PublishBL.cs" />
-    <Compile Include="Models\PublishBLVM.cs" />
+    <Compile Include="Model\AccountViewModels.cs" />
+    <Compile Include="Model\CustomerBL.cs" />
+    <Compile Include="Model\CustomerBLVM.cs" />
+    <Compile Include="Model\DayBookBL.cs" />
+    <Compile Include="Model\DayBookBLVM.cs" />
+    <Compile Include="Model\IdentityModels.cs" />
+    <Compile Include="Model\ManageViewModels.cs" />
+    <Compile Include="Model\MasterProductCategoryBL.cs" />
+    <Compile Include="Model\MasterProductCategoryBLVM.cs" />
+    <Compile Include="Model\Orders\OrderBL.cs" />
+    <Compile Include="Model\Orders\OrderBLVM.cs" />
+    <Compile Include="Model\Orders\OrderDetailBL.cs" />
+    <Compile Include="Model\ParamsHelper.cs" />
+    <Compile Include="Model\ProductBL.cs" />
+    <Compile Include="Model\ProductBLVM.cs" />
+    <Compile Include="Model\ProductCategoryBL.cs" />
+    <Compile Include="Model\ProductCategoryBLVM.cs" />
+    <Compile Include="Model\ProductSubcategoryBL.cs" />
+    <Compile Include="Model\ProductSubcategoryBLVM.cs" />
+    <Compile Include="Model\PublishBL.cs" />
+    <Compile Include="Model\PublishBLVM.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>MembershipModel.tt</DependentUpon>
     </Compile>
@@ -2312,6 +2315,11 @@
     <Content Include="Views\Publish\Edit.cshtml" />
     <Content Include="Views\Publish\Details.cshtml" />
     <Content Include="Views\Publish\Delete.cshtml" />
+    <Content Include="Views\DayBook\Index.cshtml" />
+    <Content Include="Views\DayBook\Create.cshtml" />
+    <Content Include="Views\DayBook\Edit.cshtml" />
+    <Content Include="Views\DayBook\Delete.cshtml" />
+    <Content Include="Views\DayBook\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
