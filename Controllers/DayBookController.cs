@@ -232,5 +232,70 @@ namespace AdminUI.Controllers
                 return RedirectToAction("Index");
             }
         }
+        public async Task<ActionResult> UploadAsync(FormCollection formCollection)
+        {
+            DayBookBLVM objDayBookBLVM = new DayBookBLVM();
+
+            if (Request != null)
+            {
+                HttpPostedFileBase file = Request.Files["UploadedFile"];
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                {
+                    string fileName = file.FileName;
+                    string fileContentType = file.ContentType;
+                    byte[] fileBytes = new byte[file.ContentLength];
+                    var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+
+                    using (var package = new ExcelPackage(file.InputStream))
+                    {
+                        var currentSheet = package.Workbook.Worksheets;
+                        var workSheet = currentSheet.First();
+                        var noOfCol = workSheet.Dimension.End.Column;
+                        var noOfRow = workSheet.Dimension.End.Row;
+
+                        for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
+                        {
+                            if (workSheet.Cells[rowIterator, 1].Value != null)
+                            {
+                                var daybookBL = new DayBookBL();
+                                daybookBL.AccountNo = Convert.ToInt32(workSheet.Cells[rowIterator, 1].Value);                              
+                                daybookBL.Date = workSheet.Cells[rowIterator, 2].Value.ToString();
+                                daybookBL.AccountName = workSheet.Cells[rowIterator, 3].Value.ToString();                               
+                                daybookBL.AccountDescription = workSheet.Cells[rowIterator, 4].Value.ToString();
+                                daybookBL.AccountAmount = workSheet.Cells[rowIterator, 5].Value.ToString();                              
+
+                                //productBL.ProductCategoryId = Convert.ToInt32(workSheet.Cells[rowIterator, 1].Value);
+                                //productBL.ProductCategoryName = workSheet.Cells[rowIterator, 2].Value.ToString();
+                                objDayBookBLVM.ObjDayBookBLList.Add(daybookBL);
+                            }
+                        }
+                    }
+                }
+            }
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url
+                client.BaseAddress = new Uri(GlobalValues.Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                JsonContent content = JsonContent.Create(objDayBookBLVM);
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+                HttpResponseMessage Res = await client.PostAsync("api/Product", content);
+                //Checking the response is successful or not which is sent using HttpClient
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api
+                    //var ProResponse = Res.Content.ReadAsStringAsync().Result;
+                    //Deserializing the response recieved from web api and storing into the Employee list
+                    //ProductInfo = JsonConvert.DeserializeObject<List<ProductSubcategoryBL>>(ProResponse);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }
